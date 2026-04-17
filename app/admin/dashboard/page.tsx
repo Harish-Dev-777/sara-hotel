@@ -32,85 +32,22 @@ import {
   CardHeader, 
   CardTitle 
 } from '@/components/ui/card';
-
-// --- Mock Data ---
-const INITIAL_BOOKINGS = [
-  { 
-    id: '6',
-    name: 'sanjai', 
-    email: 'sanjai@email.com', 
-    phone: '+91 9988776655', 
-    roomType: 'Family Room', 
-    guests: '4', 
-    message: 'Extra towels please', 
-    status: 'Cancelled',
-    date: '2024-04-17T10:30:00Z'
-  },
-  { 
-    id: '5',
-    name: 'sanjana', 
-    email: 'sanjana@email.com', 
-    phone: '+91 9123456789', 
-    roomType: 'Executive Suite', 
-    guests: '2', 
-    message: 'Birthday celebration', 
-    status: 'Pending',
-    date: '2024-04-17T09:15:00Z'
-  },
-  { 
-    id: '4',
-    name: 'Sneha', 
-    email: 'sneha@email.com', 
-    phone: '+91 9988776655', 
-    roomType: 'Family Room', 
-    guests: '4', 
-    message: 'Extra towels please', 
-    status: 'Cancelled',
-    date: '2024-04-17T10:30:00Z'
-  },
-  { 
-    id: '3',
-    name: 'Arjun', 
-    email: 'arjun@email.com', 
-    phone: '+91 9123456789', 
-    roomType: 'Executive Suite', 
-    guests: '2', 
-    message: 'Birthday celebration', 
-    status: 'Pending',
-    date: '2024-04-17T09:15:00Z'
-  },
-  { 
-    id: '2',
-    name: 'Priya', 
-    email: 'priya@email.com', 
-    phone: '+91 9876543210', 
-    roomType: 'Suite', 
-    guests: '3', 
-    message: 'Airport pickup required', 
-    status: 'Pending',
-    date: '2024-04-16T18:45:00Z'
-  },
-  { 
-    id: '1',
-    name: 'Harish', 
-    email: 'harish@email.com', 
-    phone: '+91 9025912345', 
-    roomType: 'Deluxe Room', 
-    guests: '2', 
-    message: 'Need early check-in', 
-    status: 'Confirmed',
-    date: '2024-04-16T14:20:00Z'
-  }
-];
-
+import { useQuery, useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
+import { Id } from '../../../convex/_generated/dataModel';
 export default function AdminDashboard() {
   const router = useRouter();
   const [isAuthChecking, setIsAuthChecking] = useState(true);
-  const [allBookings, setAllBookings] = useState(INITIAL_BOOKINGS);
+  
+  // Live Convex Data & Mutations
+  const rawBookings = useQuery(api.bookings.list);
+  const allBookings = rawBookings || [];
+  const updateStatus = useMutation(api.bookings.updateStatus);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedBooking, setSelectedBooking] = useState<typeof INITIAL_BOOKINGS[0] | null>(null);
-  const [cancellingId, setCancellingId] = useState<string | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<typeof allBookings[0] | null>(null);
+  const [cancellingId, setCancellingId] = useState<Id<"bookings"> | null>(null);
 
   const ITEMS_PER_PAGE = 5;
 
@@ -138,7 +75,7 @@ export default function AdminDashboard() {
   const handleExport = () => {
     // Standardize data for Excel
     const dataToExport = displayedBookings.map(b => ({
-      'Ref ID': `#SARA-${b.id}`,
+      'Ref ID': `#SARA-${b._id.slice(0, 8)}`,
       'Guest Name': b.name,
       'Email': b.email,
       'Phone': b.phone,
@@ -146,7 +83,7 @@ export default function AdminDashboard() {
       'Guests': b.guests,
       'Status': b.status,
       'Message': b.message,
-      'Booking Date': new Date(b.date).toLocaleDateString()
+      'Booking Date': new Date(b._creationTime).toLocaleDateString()
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(dataToExport);
@@ -178,22 +115,18 @@ export default function AdminDashboard() {
         );
     }
 
-    // Latest first (sorting by date string)
-    return [...filtered].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Latest first (sorting by creation time from Convex)
+    return [...filtered].sort((a, b) => b._creationTime - a._creationTime);
   }, [allBookings, searchQuery]);
 
   // --- Actions ---
-  const handleConfirm = (id: string) => {
-    setAllBookings(prev => prev.map(b => 
-        b.id === id ? { ...b, status: 'Confirmed' } : b
-    ));
+  const handleConfirm = async (id: Id<"bookings">) => {
+    await updateStatus({ id, status: "Confirmed" });
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     if (!cancellingId) return;
-    setAllBookings(prev => prev.map(b => 
-        b.id === cancellingId ? { ...b, status: 'Cancelled' } : b
-    ));
+    await updateStatus({ id: cancellingId, status: "Cancelled" });
     setCancellingId(null);
   };
 
@@ -245,7 +178,7 @@ export default function AdminDashboard() {
                                     <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getStatusStyle(selectedBooking.status)}`}>
                                         {selectedBooking.status}
                                     </span>
-                                    <span className="text-slate-400 text-xs font-medium">Ref ID: #SARA-{selectedBooking.id}</span>
+                                    <span className="text-slate-400 text-xs font-medium">Ref ID: #SARA-{selectedBooking._id.slice(0, 8)}</span>
                                 </div>
                             </div>
                             <Button variant="ghost" size="icon" onClick={() => setSelectedBooking(null)} className="rounded-full hover:bg-slate-100">
@@ -300,7 +233,7 @@ export default function AdminDashboard() {
                         <Button 
                             className="bg-slate-900 text-white rounded-full px-8 font-bold"
                             onClick={() => {
-                                handleConfirm(selectedBooking.id);
+                                handleConfirm(selectedBooking._id);
                                 setSelectedBooking(null);
                             }}
                         >
@@ -421,7 +354,7 @@ export default function AdminDashboard() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search name, room or phone..." 
-                    className="pl-10 pr-4 py-2 bg-slate-50 border border-slate-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/5 transition-all w-72"
+                    className="pl-10 pr-4 py-2 bg-slate-50 border border-slate-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/5 transition-all w-32 sm:w-64 md:w-72"
                  />
                </div>
                <Button 
@@ -438,16 +371,21 @@ export default function AdminDashboard() {
               <thead>
                 <tr className="bg-slate-50/50">
                   <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50">Guest Detail</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50">Room Type</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 text-center">Qty</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50">Status</th>
+                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 hidden xl:table-cell">Message</th>
+                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 hidden md:table-cell">Room Type</th>
+                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 text-center hidden md:table-cell">Qty</th>
+                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 hidden sm:table-cell">Status</th>
                   <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 text-right">Action Gate</th>
                 </tr>
               </thead>
               <tbody>
                 {paginatedBookings.length > 0 ? (
                     paginatedBookings.map((booking) => (
-                        <tr key={booking.id} className="group hover:bg-slate-50/50 transition-colors">
+                        <tr 
+                          key={booking._id} 
+                          className="group hover:bg-slate-50/50 transition-colors cursor-pointer"
+                          onClick={() => setSelectedBooking(booking)}
+                        >
                             <td className="px-8 py-6 border-b border-slate-50">
                                 <div className="flex flex-col">
                                 <span className="font-bold text-slate-900">{booking.name}</span>
@@ -457,9 +395,12 @@ export default function AdminDashboard() {
                                 </span>
                                 </div>
                             </td>
-                            <td className="px-8 py-6 border-b border-slate-50 font-bold text-slate-900">{booking.roomType}</td>
-                            <td className="px-8 py-6 border-b border-slate-50 text-center font-bold text-slate-900">{booking.guests}</td>
-                            <td className="px-8 py-6 border-b border-slate-50">
+                            <td className="px-8 py-6 border-b border-slate-50 max-w-[200px] hidden xl:table-cell">
+                                <p className="text-sm text-slate-600 truncate font-medium">{booking.message || "—"}</p>
+                            </td>
+                            <td className="px-8 py-6 border-b border-slate-50 font-bold text-slate-900 hidden md:table-cell">{booking.roomType}</td>
+                            <td className="px-8 py-6 border-b border-slate-50 text-center font-bold text-slate-900 hidden md:table-cell">{booking.guests}</td>
+                            <td className="px-8 py-6 border-b border-slate-50 hidden sm:table-cell">
                                 <span className={`px-3 py-1 rounded-full text-[10px] font-bold border tracking-wider uppercase ${getStatusStyle(booking.status)}`}>
                                 {booking.status}
                                 </span>
@@ -469,15 +410,21 @@ export default function AdminDashboard() {
                                 <Button 
                                     variant="ghost" 
                                     size="icon" 
-                                    onClick={() => setSelectedBooking(booking)}
-                                    className="h-9 w-9 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-900"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setSelectedBooking(booking);
+                                    }}
+                                    className="h-9 w-9 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-900 hidden sm:inline-flex"
                                 >
                                     <Eye size={18} />
                                 </Button>
                                 <Button 
                                     variant="ghost" 
                                     size="icon" 
-                                    onClick={() => handleConfirm(booking.id)}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleConfirm(booking._id);
+                                    }}
                                     className="h-9 w-9 rounded-xl hover:bg-emerald-50 text-slate-400 hover:text-emerald-600"
                                 >
                                     <CheckCircle2 size={18} />
@@ -485,7 +432,10 @@ export default function AdminDashboard() {
                                 <Button 
                                     variant="ghost" 
                                     size="icon" 
-                                    onClick={() => setCancellingId(booking.id)}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setCancellingId(booking._id);
+                                    }}
                                     className="h-9 w-9 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600"
                                 >
                                     <XCircle size={18} />

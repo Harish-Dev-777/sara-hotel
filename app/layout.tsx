@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import NavWrapper from "@/components/web/nav-wrapper";
+import ConvexClientProvider from "@/components/convex-client-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,8 +31,11 @@ export default function RootLayout({
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <NavWrapper />
-        {children}</body>
+        <ConvexClientProvider>
+          <NavWrapper />
+          {children}
+        </ConvexClientProvider>
+      </body>
     </html>
   );
 }

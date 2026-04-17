@@ -15,4 +15,8 @@ export default defineSchema({
       v.literal("Cancelled")
     ),
   }),
+  admins: defineTable({
+    email: v.string(),
+    password: v.string(),
+  }).index("by_email", ["email"]),
 });

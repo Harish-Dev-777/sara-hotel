@@ -68,12 +68,22 @@ function ContactForm() {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const createBooking = useMutation(api.bookings.create);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      await createBooking({
+        name: formData.fullname,
+        email: formData.email,
+        phone: formData.phone,
+        roomType: formData.roomtype,
+        guests: formData.guests,
+        message: formData.message,
+      });
+
       setIsSubmitting(false);
       setIsModalOpen(true);
       // Reset the form fields
@@ -85,7 +95,11 @@ function ContactForm() {
         guests: '',
         message: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error("Failed to submit booking:", error);
+      setIsSubmitting(false);
+      // You could add an error toast here if available
+    }
   };
 
   const contactOptions = [

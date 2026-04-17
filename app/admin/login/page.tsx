@@ -9,6 +9,8 @@ import { Label } from '@/components/ui/label';
 import ClickSpark from '@/components/ui/click-spark';
 import { loginAction } from './actions';
 import { useRouter } from 'next/navigation';
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -18,6 +20,8 @@ export default function AdminLoginPage() {
     email: '',
     password: ''
   });
+
+  const verifyCredentials = useMutation(api.auth.verifyCredentials);
 
   // Clear any existing session on mount
   useEffect(() => {
@@ -34,19 +38,18 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    
-    const loginData = new FormData();
-    loginData.append('email', formData.email);
-    loginData.append('password', formData.password);
 
     try {
-      const result = await loginAction(loginData);
+      const result = await verifyCredentials({
+        email: formData.email,
+        password: formData.password
+      });
       
       if (result.success) {
         sessionStorage.setItem('sara_admin_auth', 'true');
         router.push('/admin/dashboard');
       } else {
-        setError(result.error || 'Login failed');
+        setError('Invalid email or password.');
       }
     } catch (err) {
       setError('An unexpected error occurred. Please try again.');
