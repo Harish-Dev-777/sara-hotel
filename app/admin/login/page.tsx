@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Mail, Lock, LogIn, ShieldAlert, ArrowLeft } from 'lucide-react';
@@ -8,14 +8,21 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import ClickSpark from '@/components/ui/click-spark';
 import { loginAction } from './actions';
+import { useRouter } from 'next/navigation';
 
 export default function AdminLoginPage() {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  // Clear any existing session on mount
+  useEffect(() => {
+    sessionStorage.removeItem('sara_admin_auth');
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -36,9 +43,8 @@ export default function AdminLoginPage() {
       const result = await loginAction(loginData);
       
       if (result.success) {
-        console.log('Login successful');
-        // Simulate redirect
-        alert('Login successful! Redirecting to dashboard...');
+        sessionStorage.setItem('sara_admin_auth', 'true');
+        router.push('/admin/dashboard');
       } else {
         setError(result.error || 'Login failed');
       }
@@ -89,6 +95,16 @@ export default function AdminLoginPage() {
 
           {/* Login Card */}
           <div className="bg-white/80 backdrop-blur-xl border border-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 relative">
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 text-sm font-semibold flex items-center gap-2"
+              >
+                <ShieldAlert size={16} />
+                {error}
+              </motion.div>
+            )}
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="space-y-3">
                 <Label htmlFor="email" className="flex items-center gap-2 text-slate-500">
