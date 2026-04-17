@@ -54,3 +54,30 @@ export const setupAdmin = mutation({
     return "Admin created with hashed password";
   },
 });
+
+export const seed = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+
+    if (!email || !password) {
+      throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in Convex environment variables");
+    }
+
+    // Delete existing admins to ensure fresh start
+    const existingAdmins = await ctx.db.query("admins").collect();
+    for (const admin of existingAdmins) {
+      await ctx.db.delete(admin._id);
+    }
+
+    const hashedPassword = await hashPassword(password);
+    
+    await ctx.db.insert("admins", {
+      email: email.trim(),
+      password: hashedPassword,
+    });
+    
+    return "Admin account successfully seeded from environment variables";
+  },
+});
