@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
@@ -58,14 +58,14 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 export const Gallery = () => {
   return (
-    <section className="py-24 bg-[#FDFDFD] border-t border-slate-100">
+    <section className="py-24 bg-background border-t border-black/5">
       <div className="max-w-7xl mx-auto px-6 mb-12 flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

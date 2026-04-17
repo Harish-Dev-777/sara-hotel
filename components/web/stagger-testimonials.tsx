@@ -29,7 +29,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-500 ease-in-out select-none",
         isCenter 
           ? "z-10 bg-black text-white border-black" 
-          : "z-0 bg-white text-slate-950 border-slate-100 hover:border-slate-300"
+          : "z-0 bg-[#D1D1D1] text-black border-black/10 hover:border-black/30"
       )}
       style={{
         width: cardSize,
@@ -58,9 +58,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <img
           src={testimonial.imgSrc}
           alt={`${testimonial.by}`}
-          className="h-14 w-12 bg-slate-100 object-cover object-top"
+          className="h-14 w-12 bg-black/10 object-cover object-top"
           style={{
-            boxShadow: "3.5px 3.5px 0px #FDFDFD"
+            boxShadow: "3.5px 3.5px 0px #000000"
           }}
         />
         <div className="flex gap-0.5">
@@ -78,14 +78,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
       <h3 className={cn(
         "text-lg sm:text-xl font-medium leading-tight mb-4",
-        isCenter ? "text-white" : "text-slate-900"
+        isCenter ? "text-white" : "text-black"
       )}>
         "{testimonial.testimonial}"
       </h3>
       
       <p className={cn(
         "absolute bottom-8 left-8 right-8 text-sm font-semibold tracking-wide uppercase",
-        isCenter ? "text-white/70" : "text-slate-400"
+        isCenter ? "text-white/70" : "text-black/60"
       )}>
         — {testimonial.by}
       </p>
@@ -128,7 +128,7 @@ export const StaggerTestimonials: React.FC = () => {
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-[#FDFDFD]"
+      className="relative w-full overflow-hidden bg-background"
       style={{ height: 600 }}
     >
       {testimonialsList.map((testimonial, index) => {
@@ -154,7 +154,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(-1)}
           className={cn(
-            "flex h-14 w-14 items-center justify-center transition-all bg-white border border-slate-200 shadow-sm hover:bg-black hover:text-white hover:border-black rounded-full"
+            "flex h-14 w-14 items-center justify-center transition-all bg-black text-white border border-black shadow-lg hover:scale-110 active:scale-95 rounded-full"
           )}
           aria-label="Previous testimonial"
         >
@@ -163,7 +163,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(1)}
           className={cn(
-            "flex h-14 w-14 items-center justify-center transition-all bg-white border border-slate-200 shadow-sm hover:bg-black hover:text-white hover:border-black rounded-full"
+            "flex h-14 w-14 items-center justify-center transition-all bg-black text-white border border-black shadow-lg hover:scale-110 active:scale-95 rounded-full"
           )}
           aria-label="Next testimonial"
         >

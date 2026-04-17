@@ -151,7 +151,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-background">
       {/* Modals Layer */}
       <AnimatePresence>
         {/* Details Modal */}
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
                     <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center text-red-500 mx-auto mb-6 border border-red-100">
                         <AlertCircle size={32} />
                     </div>
-                    <h4 className="text-xl font-bold text-slate-900 mb-3">Cancel Booking?</h4>
+                    <h4 className="text-xl font-bold text-black mb-3">Cancel Booking?</h4>
                     <p className="text-slate-500 mb-8 text-sm leading-relaxed">
                         Are you sure you want to cancel this booking? This action will update the guest status to cancelled.
                     </p>
@@ -308,7 +308,7 @@ export default function AdminDashboard() {
 
       <main className="max-w-[1600px] mx-auto p-8 md:p-12">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 mb-2">Booking Management Dashboard</h1>
+          <h1 className="text-4xl font-bold tracking-tight text-black mb-2">Booking Management Dashboard</h1>
           <p className="text-slate-500 font-medium">Monitor and manage all guest reservations in one place.</p>
         </div>
 
@@ -359,7 +359,7 @@ export default function AdminDashboard() {
                </div>
                <Button 
                 onClick={handleExport}
-                className="bg-slate-900 text-white rounded-full px-6 font-bold shadow-lg shadow-slate-900/10"
+                className="bg-black text-white rounded-full px-6 font-bold shadow-lg shadow-black/10"
                >
                  Export Data
                </Button>

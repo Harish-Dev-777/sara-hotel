@@ -18,7 +18,7 @@ const page = () => {
       sparkCount={8}
       duration={400}
     >
-      <main className="bg-[#FDFDFD]">
+      <main className="bg-background">
         <Hero/>
         <Stats/>
         
@@ -36,7 +36,7 @@ const page = () => {
                 💬 Testimonials
               </span>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-center relative">
-                <span className="inline-block bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                <span className="inline-block bg-gradient-to-r from-black via-slate-500 to-black bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                   Stories from Our Guests
                 </span>
               </h2>

@@ -40,7 +40,7 @@ const CountUp = ({ end, decimals = 0, duration = 2 }: { end: number, decimals?: 
 
 const Stats = () => {
     return (
-        <section className="bg-[#FDFDFD] py-20 px-6 sm:px-10 lg:px-20 border-t border-slate-100">
+        <section className="bg-background py-20 px-6 sm:px-10 lg:px-20 border-t border-slate-100">
             <div className="max-w-7xl mx-auto flex flex-col items-center">
                 
                 {/* Shiny Title */}
@@ -51,7 +51,7 @@ const Stats = () => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center mb-16 relative">
-                        <span className="inline-block bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                        <span className="inline-block bg-gradient-to-r from-black via-slate-500 to-black bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                             Trusted by Travelers Worldwide
                         </span>
                     </h2>
@@ -65,12 +65,12 @@ const Stats = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.8, delay: 0.1 }}
-                        className="flex flex-col items-center justify-center p-6 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-50"
+                        className="flex flex-col items-center justify-center p-8 bg-black rounded-3xl shadow-2xl border border-white/10"
                     >
-                        <div className="text-5xl md:text-6xl font-bold text-slate-950 mb-2">
+                        <div className="text-5xl md:text-6xl font-bold text-white mb-2">
                             <CountUp end={4.8} decimals={1} duration={2} /><span className="text-3xl text-slate-400">/5</span>
                         </div>
-                        <div className="text-slate-500 font-medium text-center">Average Rating</div>
+                        <div className="text-slate-400 font-medium text-center uppercase tracking-widest text-xs">Average Rating</div>
                     </motion.div>
 
                     {/* Stat 2 */}
@@ -79,12 +79,12 @@ const Stats = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="flex flex-col items-center justify-center p-6 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-50"
+                        className="flex flex-col items-center justify-center p-8 bg-black rounded-3xl shadow-2xl border border-white/10"
                     >
-                        <div className="text-5xl md:text-6xl font-bold text-slate-950 mb-2">
-                            <CountUp end={500} duration={2} /><span className="text-blue-500">+</span>
+                        <div className="text-5xl md:text-6xl font-bold text-white mb-2">
+                            <CountUp end={500} duration={2} /><span className="text-white/50">+</span>
                         </div>
-                        <div className="text-slate-500 font-medium text-center">Happy Guests</div>
+                        <div className="text-slate-400 font-medium text-center uppercase tracking-widest text-xs">Happy Guests</div>
                     </motion.div>
 
                     {/* Stat 3 */}
@@ -93,12 +93,12 @@ const Stats = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="flex flex-col items-center justify-center p-6 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-50"
+                        className="flex flex-col items-center justify-center p-8 bg-black rounded-3xl shadow-2xl border border-white/10"
                     >
-                        <div className="text-5xl md:text-6xl font-bold text-slate-950 mb-2">
-                            <CountUp end={25} duration={2.5} /><span className="text-blue-500">+</span>
+                        <div className="text-5xl md:text-6xl font-bold text-white mb-2">
+                            <CountUp end={25} duration={2.5} /><span className="text-white/50">+</span>
                         </div>
-                        <div className="text-slate-500 font-medium text-center">Guests Countries</div>
+                        <div className="text-slate-400 font-medium text-center uppercase tracking-widest text-xs">Guests Countries</div>
                     </motion.div>
 
                     {/* Stat 4 */}
@@ -107,12 +107,12 @@ const Stats = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="flex flex-col items-center justify-center p-6 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-50"
+                        className="flex flex-col items-center justify-center p-8 bg-black rounded-3xl shadow-2xl border border-white/10"
                     >
-                        <div className="text-5xl md:text-6xl font-bold text-slate-950 mb-2">
-                            <CountUp end={5} duration={1.5} /><span className="text-blue-500">+</span>
+                        <div className="text-5xl md:text-6xl font-bold text-white mb-2">
+                            <CountUp end={5} duration={1.5} /><span className="text-white/50">+</span>
                         </div>
-                        <div className="text-slate-500 font-medium text-center">Years of Excellence</div>
+                        <div className="text-slate-400 font-medium text-center uppercase tracking-widest text-xs">Years of Excellence</div>
                     </motion.div>
                 </div>
 

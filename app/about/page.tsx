@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import ClickSpark from '@/components/ui/click-spark';
 import Footer from '@/components/web/footer';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -45,9 +45,9 @@ const containerVariants = {
     },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 export default function AboutPage() {
@@ -59,21 +59,21 @@ export default function AboutPage() {
       sparkCount={6}
       duration={600}
     >
-      <main className="min-h-screen pt-32 bg-[#FDFDFD] text-slate-900">
+      <main className="min-h-screen pt-32 bg-background text-black">
         
         {/* Intro Section */}
         <section className="max-w-4xl mx-auto px-6 mb-32 flex flex-col items-center text-center">
             <motion.div
                 initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
                 className="flex flex-col items-center"
             >
                 <span className="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-slate-500 text-xs font-bold tracking-widest uppercase mb-6">
                     About Us
                 </span>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-center relative mb-8">
-                    <span className="inline-block bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                    <span className="inline-block bg-gradient-to-r from-black via-slate-500 to-black bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                         Redefining Hospitality
                     </span>
                     <br />

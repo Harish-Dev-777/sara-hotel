@@ -222,7 +222,7 @@ const HeroSection = ({
 
     return (
         <div 
-            className="bg-[#FDFDFD] text-slate-950 min-h-screen flex flex-col pt-10 relative"
+            className="bg-background text-slate-950 min-h-screen flex flex-col pt-10 relative"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
@@ -264,7 +264,7 @@ const HeroSection = ({
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                        className="mt-6 block text-slate-600 text-center text-lg sm:text-xl px-4 max-w-2xl"
+                        className="mt-6 block text-black/70 text-center text-lg sm:text-xl px-4 max-w-2xl"
                     >
                         {tagline}
                     </motion.p>
@@ -279,7 +279,7 @@ const HeroSection = ({
                     <Link href={buttonHref || "#"} className="contents">
                         <button
                             ref={targetRef}
-                            className="py-3 px-8 rounded-full border border-slate-900 hover:bg-slate-900 hover:text-white text-slate-900 transition-all duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
+                            className="py-3 px-8 rounded-full border border-black hover:bg-black hover:text-white text-black transition-all duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
                         >
                             {buttonText}
                         </button>

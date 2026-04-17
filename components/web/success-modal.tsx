@@ -32,10 +32,10 @@ export default function SuccessModal({ isOpen, onClose, title, message }: Succes
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="w-full max-w-md bg-white rounded-[3rem] p-10 md:p-12 shadow-2xl pointer-events-auto relative overflow-hidden text-center"
+              className="w-full max-w-md bg-[#dcdcdc] rounded-[3rem] p-10 md:p-12 shadow-2xl pointer-events-auto relative overflow-hidden text-center border-2 border-black"
             >
               {/* Decorative Gradient Background */}
-              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900" />
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-black via-slate-500 to-black" />
               
               {/* Close Button */}
               <button 
@@ -72,7 +72,7 @@ export default function SuccessModal({ isOpen, onClose, title, message }: Succes
               </div>
 
               {/* Text Content */}
-              <h3 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
+              <h3 className="text-3xl font-bold tracking-tight text-black mb-4">
                 {title}
               </h3>
               <p className="text-lg text-slate-500 font-medium leading-relaxed mb-10">
@@ -82,7 +82,7 @@ export default function SuccessModal({ isOpen, onClose, title, message }: Succes
               {/* Action Button */}
               <button
                 onClick={onClose}
-                className="w-full py-5 bg-slate-900 text-white rounded-full font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-200"
+                className="w-full py-5 bg-black text-white rounded-full font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-black/10"
               >
                 Excellent
               </button>

@@ -57,7 +57,7 @@ export default function RoomDetailPage() {
             sparkCount={6}
             duration={600}
         >
-            <main className="min-h-screen bg-[#FDFDFD] text-slate-900 overflow-x-hidden">
+            <main className="min-h-screen bg-background text-slate-900 overflow-x-hidden">
                 
                 {/* Back Button & Breadcrumbs */}
                 <div className="fixed top-24 left-6 z-50 hidden lg:block">

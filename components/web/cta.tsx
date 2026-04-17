@@ -20,7 +20,7 @@ export const CTA = () => {
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
                         className="flex flex-col items-center"
                     >
                         <span className="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-slate-300 text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">

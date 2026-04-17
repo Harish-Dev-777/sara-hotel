@@ -20,21 +20,21 @@ export default function RoomsPage() {
       sparkCount={6}
       duration={600}
     >
-      <main className="min-h-screen pt-32 bg-[#FDFDFD] text-slate-900">
+      <main className="min-h-screen pt-32 bg-background text-black">
         
         {/* Header Section */}
         <section className="max-w-4xl mx-auto px-6 mb-24 flex flex-col items-center text-center">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
                 className="flex flex-col items-center"
             >
                 <span className="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-slate-500 text-xs font-bold tracking-widest uppercase mb-6">
                     Our Rooms
                 </span>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-center relative mb-6">
-                    <span className="inline-block bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                    <span className="inline-block bg-gradient-to-r from-black via-slate-500 to-black bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                         Find Your Perfect Room
                     </span>
                 </h1>
@@ -130,7 +130,7 @@ export default function RoomsPage() {
                                 
                                 <Link 
                                     href={`/contact?room=${room.id}`}
-                                    className="sm:ml-auto group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-full font-semibold overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]"
+                                    className="sm:ml-auto group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-black text-white rounded-full font-semibold overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]"
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
                                         Book Now

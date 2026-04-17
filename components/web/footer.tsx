@@ -5,7 +5,7 @@ import { footerData } from '@/data/footer';
 
 export const Footer = () => {
     return (
-        <footer className="relative bg-[#FDFDFD] pt-32 pb-8 overflow-hidden border-t border-slate-100">
+        <footer className="relative bg-background pt-32 pb-8 overflow-hidden border-t border-black/10">
             {/* Top Container */}
             <div className="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row justify-between gap-16 lg:gap-32 mb-20">
                 
@@ -57,7 +57,7 @@ export const Footer = () => {
 
             {/* Giant Monolithic Bottom Text */}
             <div className="w-full flex justify-center pointer-events-none select-none overflow-hidden translate-y-[15%] px-4">
-                <span className="text-[14vw] leading-[0.8] font-bold tracking-tight whitespace-nowrap font-sans bg-gradient-to-b from-slate-900/80 to-black/40 bg-clip-text text-transparent">
+                <span className="text-[14vw] leading-[0.8] font-bold tracking-tight whitespace-nowrap font-sans bg-gradient-to-b from-black/20 to-black/5 bg-clip-text text-transparent">
                     SARA HOTEL
                 </span>
             </div>

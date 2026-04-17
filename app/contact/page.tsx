@@ -131,21 +131,21 @@ function ContactForm() {
       sparkCount={6}
       duration={600}
     >
-      <main className="min-h-screen pt-32 bg-[#FDFDFD] text-slate-900 overflow-x-hidden">
+      <main className="min-h-screen pt-32 bg-background text-black overflow-x-hidden">
         
         {/* Header Section */}
         <section className="max-w-4xl mx-auto px-6 mb-24 flex flex-col items-center text-center">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
                 className="flex flex-col items-center"
             >
-                <span className="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-slate-500 text-xs font-bold tracking-widest uppercase mb-6">
+                <span className="px-4 py-1.5 rounded-full bg-black/5 border border-black/10 text-black/60 text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
                     Connect With Us
                 </span>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-center relative max-w-3xl">
-                    <span className="inline-block bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                    <span className="inline-block bg-gradient-to-r from-black via-slate-500 to-black bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                         Let’s Plan Your Perfect Stay
                     </span>
                 </h1>
@@ -162,15 +162,15 @@ function ContactForm() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 flex flex-col items-center text-center gap-4 group hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500"
+                        className="p-8 rounded-[2rem] bg-black text-white border border-white/10 flex flex-col items-center text-center gap-4 group hover:scale-[1.02] transition-all duration-500 shadow-2xl"
                     >
-                        <div className="w-14 h-14 rounded-full bg-white border border-slate-200 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                            <option.icon className="w-6 h-6 text-slate-900" strokeWidth={1.5} />
+                        <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                            <option.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
                         </div>
                         <div>
-                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">{option.title}</h3>
-                            <p className="text-lg font-bold text-slate-900">{option.content}</p>
-                            <p className="text-sm text-slate-400 font-medium">{option.sub}</p>
+                            <h3 className="text-sm font-bold text-white/50 uppercase tracking-widest mb-1">{option.title}</h3>
+                            <p className="text-lg font-bold text-white">{option.content}</p>
+                            <p className="text-sm text-white/40 font-medium">{option.sub}</p>
                         </div>
                     </motion.div>
                 ))}
@@ -183,7 +183,7 @@ function ContactForm() {
                 
                 {/* Visual Accent Column */}
                 <div className="lg:col-span-2 hidden lg:flex flex-col gap-8">
-                    <div className="aspect-[4/5] rounded-[3rem] bg-slate-100 relative overflow-hidden group">
+                    <div className="aspect-[4/5] rounded-[3rem] bg-black relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/40 to-transparent z-10" />
                         <img 
                             src="/room-images/presidential-suite-room.png" 
@@ -202,7 +202,7 @@ function ContactForm() {
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    className="lg:col-span-3 bg-white p-8 md:p-12 rounded-[3.5rem] border border-slate-100 shadow-2xl shadow-slate-200/50"
+                    className="lg:col-span-3 bg-[#e5e5e5] p-8 md:p-12 rounded-[3.5rem] border-2 border-black shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]"
                 >
                     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                         <div className="grid md:grid-cols-2 gap-8">
@@ -210,13 +210,13 @@ function ContactForm() {
                                 <Label htmlFor="fullname" className="flex items-center gap-2">
                                     <User className="w-3.5 h-3.5" /> Full Name*
                                 </Label>
-                                <Input id="fullname" ref={nameInputRef} value={formData.fullname} onChange={handleChange} placeholder="Your Name" required />
+                                <Input id="fullname" ref={nameInputRef} value={formData.fullname} onChange={handleChange} placeholder="Your Name" required className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all" />
                             </div>
                             <div className="space-y-3">
                                 <Label htmlFor="email" className="flex items-center gap-2">
                                     <Mail className="w-3.5 h-3.5" /> Email Address
                                 </Label>
-                                <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="123@example.com" />
+                                <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="123@example.com" className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all" />
                             </div>
                         </div>
 
@@ -225,7 +225,7 @@ function ContactForm() {
                                 <Label htmlFor="phone" className="flex items-center gap-2">
                                     <Phone className="w-3.5 h-3.5" /> Phone Number*
                                 </Label>
-                                <Input id="phone" value={formData.phone} onChange={handleChange} placeholder="+91 00000 00000" required />
+                                <Input id="phone" value={formData.phone} onChange={handleChange} placeholder="+91 00000 00000" required className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all" />
                             </div>
                             <div className="space-y-3">
                                 <Label htmlFor="roomtype" className="flex items-center gap-2">
@@ -236,12 +236,12 @@ function ContactForm() {
                                     value={formData.roomtype} 
                                     onValueChange={(value) => setFormData(prev => ({ ...prev, roomtype: value }))}
                                 >
-                                    <SelectTrigger className="h-12 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm focus:ring-2 focus:ring-slate-900 transition-all">
+                                    <SelectTrigger className="h-12 w-full rounded-2xl border-2 border-black/20 bg-[#e5e5e5] px-4 py-2 text-sm focus:ring-0 focus:ring-offset-0 focus:border-black transition-all">
                                         <SelectValue placeholder="Select Room Type" />
                                     </SelectTrigger>
-                                    <SelectContent className="rounded-xl border-slate-200 shadow-xl overflow-hidden">
+                                    <SelectContent className="rounded-xl border-2 border-black bg-[#e5e5e5] shadow-2xl overflow-hidden">
                                         {rooms.map(room => (
-                                            <SelectItem key={room.id} value={room.id} className="cursor-pointer hover:bg-slate-50 transition-colors">
+                                            <SelectItem key={room.id} value={room.id} className="cursor-pointer hover:bg-black/5 transition-colors">
                                                 {room.title}
                                             </SelectItem>
                                         ))}
@@ -254,20 +254,20 @@ function ContactForm() {
                             <Label htmlFor="guests" className="flex items-center gap-2">
                                 <Users className="w-3.5 h-3.5" /> Number of Guests*
                             </Label>
-                            <Input id="guests" type="number" min="1" max="10" value={formData.guests} onChange={handleChange} placeholder="e.g. 2" required />
+                            <Input id="guests" type="number" min="1" max="10" value={formData.guests} onChange={handleChange} placeholder="e.g. 2" required className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all" />
                         </div>
 
                         <div className="space-y-3">
                             <Label htmlFor="message" className="flex items-center gap-2">
                                 <MessageSquare className="w-3.5 h-3.5" /> Message*
                             </Label>
-                            <Textarea id="message" value={formData.message} onChange={handleChange} placeholder="How can we make your stay extraordinary?" required />
+                            <Textarea id="message" value={formData.message} onChange={handleChange} placeholder="How can we make your stay extraordinary?" required className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all min-h-[150px]" />
                         </div>
 
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full mt-4 group relative inline-flex items-center justify-center gap-2 px-8 py-5 bg-slate-900 text-white rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
+                            className="w-full mt-4 group relative inline-flex items-center justify-center gap-2 px-8 py-5 bg-black text-white rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 {isSubmitting ? "Sending..." : "Send Message"}
