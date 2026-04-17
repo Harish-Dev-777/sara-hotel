@@ -70,12 +70,17 @@ function ContactForm() {
 
   const createBooking = useMutation(api.bookings.create);
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
+    console.log("Submitting formData:", formData);
+
     try {
-      await createBooking({
+      const result = await createBooking({
         name: formData.fullname,
         email: formData.email,
         phone: formData.phone,
@@ -83,6 +88,8 @@ function ContactForm() {
         guests: formData.guests,
         message: formData.message,
       });
+
+      console.log("Mutation result:", result);
 
       setIsSubmitting(false);
       setIsModalOpen(true);
@@ -95,10 +102,10 @@ function ContactForm() {
         guests: '',
         message: ''
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to submit booking:", error);
       setIsSubmitting(false);
-      // You could add an error toast here if available
+      setError(error?.message || "Something went wrong. Please try again.");
     }
   };
 
@@ -263,6 +270,12 @@ function ContactForm() {
                             </Label>
                             <Textarea id="message" value={formData.message} onChange={handleChange} placeholder="How can we make your stay extraordinary?" required className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all min-h-[150px]" />
                         </div>
+
+                        {error && (
+                            <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm font-medium animate-in fade-in slide-in-from-top-2 duration-300">
+                                {error}
+                            </div>
+                        )}
 
                         <button
                             type="submit"
