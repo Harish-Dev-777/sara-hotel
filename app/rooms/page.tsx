@@ -97,16 +97,16 @@ export default function RoomsPage() {
                             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
                                 {room.title}
                             </h2>
-                            <p className="text-lg text-slate-500 font-medium leading-relaxed mb-8 max-w-lg">
+                            <p className="text-lg text-black/60 font-medium leading-relaxed mb-8 max-w-lg">
                                 {room.description}
                             </p>
 
                             {/* Features Grid */}
                             <ul className="grid grid-cols-2 gap-4 mb-10">
                                 {room.features.map((feature, i) => (
-                                    <li key={i} className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-                                        <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center">
-                                            <Check outline="none" className="w-3 h-3 text-slate-900" strokeWidth={3} />
+                                    <li key={i} className="flex items-center gap-2 text-sm font-semibold text-black/70">
+                                        <div className="w-5 h-5 rounded-full bg-black/5 flex items-center justify-center border border-black/10">
+                                            <Check className="w-3 h-3 text-black" strokeWidth={3} />
                                         </div>
                                         {feature}
                                     </li>

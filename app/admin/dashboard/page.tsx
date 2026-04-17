@@ -151,7 +151,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-black">
       {/* Modals Layer */}
       <AnimatePresence>
         {/* Details Modal */}
@@ -168,7 +168,7 @@ export default function AdminDashboard() {
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="relative w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl shadow-slate-900/20 overflow-hidden"
+                    className="relative w-full max-w-2xl bg-[#e5e5e5] rounded-[3.5rem] shadow-2xl overflow-hidden border-2 border-black"
                 >
                     <div className="p-8 md:p-10">
                         <div className="flex justify-between items-start mb-8">
@@ -288,10 +288,10 @@ export default function AdminDashboard() {
         )}
       </AnimatePresence>
 
-      <nav className="bg-white border-b border-slate-200 px-8 py-4 sticky top-0 z-50">
+      <nav className="bg-[#e5e5e5] border-b-2 border-black px-8 py-4 sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 px-4 py-2 bg-slate-100 rounded-xl">Sara Hotel Admin</h2>
+            <h2 className="text-xl font-bold tracking-tight text-black px-4 py-2 bg-black/5 rounded-xl border border-black/10">Sara Hotel Admin</h2>
           </div>
           <div className="flex items-center gap-4">
             <Button 
@@ -320,7 +320,7 @@ export default function AdminDashboard() {
                 { title: 'Pending', value: allBookings.filter(b => b.status === 'Pending').length, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
                 { title: 'Cancelled', value: allBookings.filter(b => b.status === 'Cancelled').length, icon: XCircle, color: 'text-red-600', bg: 'bg-red-50' },
             ].map((stat, i) => (
-                <Card key={i} className="border-none shadow-sm rounded-[1.5rem] overflow-hidden">
+                <Card key={i} className="bg-[#e5e5e5] border-2 border-black/10 hover:border-black transition-all shadow-sm rounded-[1.5rem] overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                         <CardTitle className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">{stat.title}</CardTitle>
                         <div className={`${stat.bg} ${stat.color} p-2 rounded-xl`}>
@@ -339,7 +339,7 @@ export default function AdminDashboard() {
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ delay: 0.4 }}
-           className="bg-white border border-slate-100 rounded-[2rem] shadow-sm overflow-hidden"
+           className="bg-[#e5e5e5] border-2 border-black rounded-[2rem] shadow-sm overflow-hidden"
         >
           <div className="p-8 border-b border-slate-50 lg:flex items-center justify-between">
             <div>
@@ -348,13 +348,13 @@ export default function AdminDashboard() {
             </div>
             <div className="flex items-center gap-4 mt-4 lg:mt-0">
                <div className="relative">
-                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-black/40" size={16} />
                  <input 
                     type="text" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search name, room or phone..." 
-                    className="pl-10 pr-4 py-2 bg-slate-50 border border-slate-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/5 transition-all w-32 sm:w-64 md:w-72"
+                    className="pl-10 pr-4 py-2 bg-black/5 border-2 border-black/10 rounded-full text-sm focus:outline-none focus:border-black transition-all w-32 sm:w-64 md:w-72 font-medium"
                  />
                </div>
                <Button 
@@ -370,12 +370,12 @@ export default function AdminDashboard() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50/50">
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50">Guest Detail</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 hidden xl:table-cell">Message</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 hidden md:table-cell">Room Type</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 text-center hidden md:table-cell">Qty</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 hidden sm:table-cell">Status</th>
-                  <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 text-right">Action Gate</th>
+                  <th className="px-8 py-4 text-xs font-bold text-black/40 uppercase tracking-widest border-b-2 border-black/10">Guest Detail</th>
+                  <th className="px-8 py-4 text-xs font-bold text-black/40 uppercase tracking-widest border-b-2 border-black/10 hidden xl:table-cell">Message</th>
+                  <th className="px-8 py-4 text-xs font-bold text-black/40 uppercase tracking-widest border-b-2 border-black/10 hidden md:table-cell">Room Type</th>
+                  <th className="px-8 py-4 text-xs font-bold text-black/40 uppercase tracking-widest border-b-2 border-black/10 text-center hidden md:table-cell">Qty</th>
+                  <th className="px-8 py-4 text-xs font-bold text-black/40 uppercase tracking-widest border-b-2 border-black/10 hidden sm:table-cell">Status</th>
+                  <th className="px-8 py-4 text-xs font-bold text-black/40 uppercase tracking-widest border-b-2 border-black/10 text-right">Action Gate</th>
                 </tr>
               </thead>
               <tbody>
@@ -388,10 +388,10 @@ export default function AdminDashboard() {
                         >
                             <td className="px-8 py-6 border-b border-slate-50">
                                 <div className="flex flex-col">
-                                <span className="font-bold text-slate-900">{booking.name}</span>
-                                <span className="text-[11px] text-slate-400 font-bold mb-1">{booking.email}</span>
-                                <span className="text-sm text-slate-600 font-bold flex items-center gap-1">
-                                    <Phone size={12} className="text-slate-400" /> {booking.phone}
+                                <span className="font-bold text-black">{booking.name}</span>
+                                <span className="text-[11px] text-black/40 font-bold mb-1">{booking.email}</span>
+                                <span className="text-sm text-black/60 font-bold flex items-center gap-1">
+                                    <Phone size={12} className="text-black/30" /> {booking.phone}
                                 </span>
                                 </div>
                             </td>
@@ -405,7 +405,7 @@ export default function AdminDashboard() {
                                 {booking.status}
                                 </span>
                             </td>
-                            <td className="px-8 py-6 border-b border-slate-50">
+                            <td className="px-8 py-6 border-b-2 border-black/5">
                                 <div className="flex items-center justify-end gap-2">
                                 <Button 
                                     variant="ghost" 
@@ -414,7 +414,7 @@ export default function AdminDashboard() {
                                       e.stopPropagation();
                                       setSelectedBooking(booking);
                                     }}
-                                    className="h-9 w-9 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-900 hidden sm:inline-flex"
+                                    className="h-9 w-9 rounded-xl hover:bg-black/5 text-black/30 hover:text-black hidden sm:inline-flex border border-transparent hover:border-black/10"
                                 >
                                     <Eye size={18} />
                                 </Button>

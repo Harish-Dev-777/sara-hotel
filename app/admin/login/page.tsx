@@ -74,8 +74,8 @@ export default function AdminLoginPage() {
             <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-black rounded-full blur-[120px]" />
         </div>
 
-        <Link href="/" className="absolute top-10 left-10 z-10">
-            <Button variant="outline" className="gap-2 border-black border-2 font-bold hover:bg-black hover:text-white transition-all rounded-full px-6">
+        <Link href="/" className="absolute top-10 left-10 z-[100]">
+            <Button variant="outline" className="gap-2 border-black border-2 font-bold hover:bg-black hover:text-[#DCDCDC] transition-all rounded-full px-6 bg-transparent text-black">
                 <ArrowLeft size={18} />
                 Back to Home
             </Button>
@@ -119,7 +119,7 @@ export default function AdminLoginPage() {
                   onChange={handleChange}
                   placeholder="admin@sarahotel.com" 
                   required 
-                  className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all"
+                  className="bg-[#e5e5e5] border-2 border-black text-black placeholder:text-black/30 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all font-medium"
                 />
               </div>
 
@@ -135,7 +135,7 @@ export default function AdminLoginPage() {
                   onChange={handleChange}
                   placeholder="••••••••" 
                   required 
-                  className="bg-[#e5e5e5] border-2 border-black/20 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all"
+                  className="bg-[#e5e5e5] border-2 border-black text-black placeholder:text-black/30 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all font-medium"
                 />
               </div>
 
